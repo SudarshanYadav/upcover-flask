@@ -18,11 +18,11 @@ def quote():
     response_data['ThirdpartyTheft'] = '%f'%prediction
     return json.dumps(response_data)
 
-@app.route('/getQuote', methods = ['POST'])
+@app.route('/getQuote', methods = ['POST', 'GET'])
 def get_quote():
     from sklearn.externals import joblib
     m = joblib.load('insurance_premium_predictor.pkl')
-    params = json.load(request.data)
+    params = json.load(request.form)
     postcode = params.get('postalcode', '2163')
     year = params.get('year', 1992)
     day = params.get('day', 6)
