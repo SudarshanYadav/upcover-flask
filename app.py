@@ -13,7 +13,10 @@ def quote():
     from sklearn.externals import joblib
     m = joblib.load('insurance_premium_predictor.pkl')
     prediction = m.predict([[2163, 22, 100, 100]])
-    return "%d"%prediction
+    response_data = {}
+    response_data['Comprehensive'] = '%f'%prediction
+    response_data['ThirdpartyTheft'] = '%f'%prediction
+    return json.dumps(response_data)
 
 @app.route('/getQuote', methods = ['POST'])
 def get_quote():
