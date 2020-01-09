@@ -8,7 +8,7 @@ import json
 from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
 
 
-@app.route('/')
+@app.route('/',  methods = ['POST', 'GET'])
 def quote():
     from sklearn.externals import joblib
     m = joblib.load('insurance_premium_predictor.pkl')
@@ -22,7 +22,7 @@ def quote():
 def get_quote():
     from sklearn.externals import joblib
     m = joblib.load('insurance_premium_predictor.pkl')
-    params = json.load(request.form)
+    params = request.form
     postcode = params.get('postalcode', '2163')
     year = params.get('year', 1992)
     day = params.get('day', 6)
